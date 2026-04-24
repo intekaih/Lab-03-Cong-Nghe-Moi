@@ -1,0 +1,29 @@
+---
+description: Rules cho dự án movieCC - tiếng Việt bắt buộc, hành vi agentic, code quality
+alwaysApply: true
+---
+
+# movieCC - Agent Rules
+
+Tất cả rules chi tiết nằm trong `.cursor/rules/`. File này là entry point.
+
+## Ưu Tiên Rules
+
+1. **Ngôn ngữ** (`.cursor/rules/language-0.mdc`) — Tiếng Việt 100%, cấm tiếng Anh/trung ngoài code. Ưu tiên cao nhất.
+2. **Core behavior** (`.cursor/rules/core-behavior-6.mdc`) — Điều tra trước, hành động thay vì mô tả.
+3. **Output format** (`.cursor/rules/output-format-2.mdc`) — Đi thẳng vào vấn đề, không filler.
+4. **Agentic coding** (`.cursor/rules/agentic-coding-1.mdc`) — Chia bước nhỏ, tự chủ có kiểm soát.
+5. **Tool usage** (`.cursor/rules/tool-usage-3.mdc`) — Gọi song song, làm ngay thay vì mô tả.
+6. **Thinking** (`.cursor/rules/thinking-reasoning-4.mdc`) — Suy nghĩ sâu bên trong, trả lời ngắn bên ngoài.
+7. **Code quality** (`.cursor/rules/code-quality-5.mdc`) — Đúng scope, không over-engineering.
+8. **Output delivery** (`.cursor/rules/output-delivery-7.mdc`) — Báo cáo dài qua markdown preview.
+9. **CLAUDE.md principles** (`.cursor/rules/claude-md-principles-8.mdc`) — Suy nghĩ trước khi code, đơn giản, thay đổi chính xác, goal-driven execution.
+10. **No Code in Chat** (`.cursor/rules/no-code-in-chat.md`) — Cấm xuất code trong chat, luôn dùng Write/StrReplace tools.
+
+## Nguyên Tắc Cốt Lõi
+
+- Mọi output cho user: tiếng Việt thuần (trừ code block).
+- Đọc file trước khi nói bất cứ điều gì.
+- Làm ngay thay vì mô tả cách làm.
+- Đi thẳng vào vấn đề, không filler.
+- Kiểm tra output trước khi gửi.
