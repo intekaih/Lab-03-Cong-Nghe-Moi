@@ -33,15 +33,15 @@ export default function DeleteButton({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <button className="text-xs text-red-400 hover:text-red-600 transition-colors">
-          Xoa
-        </button>
+        <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive h-auto p-0 px-1 font-normal">
+          Xóa
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Xac nhan xoa</DialogTitle>
+          <DialogTitle>Xác nhận xóa</DialogTitle>
           <DialogDescription>
-            Ban co chac chan muon xoa loi nhan nay? Hanh dong nay khong the hoan tac.
+            Bạn có chắc chắn muốn xóa lời nhắn này? Hành động này không thể hoàn tác.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>

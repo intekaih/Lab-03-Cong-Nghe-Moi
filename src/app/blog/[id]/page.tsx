@@ -58,48 +58,48 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const commentList = comments.length > 0 ? comments : await getComments(post.id);
 
   return (
-    <div>
+    <div className="max-w-3xl mx-auto px-4 py-12">
       <Link
         href="/blog"
-        className="text-blue-600 hover:underline text-sm mb-6 inline-block"
+        className="text-primary hover:underline text-sm mb-6 inline-block"
       >
-        Quay lai danh sach
+        ← Quay lại danh sách
       </Link>
       <article>
         <h1 className="text-3xl font-bold mb-4 capitalize">{post.title}</h1>
-        <div className="flex items-center gap-3 mb-6 text-sm text-gray-500">
+        <div className="flex items-center gap-3 mb-6 text-sm text-muted-foreground">
           <span>
-            Tac gia: <strong className="text-gray-700">{authorData.name}</strong>
+            Tác giả: <strong className="text-foreground">{authorData.name}</strong>
           </span>
-          <span>-</span>
+          <span>—</span>
           <span>{authorData.email}</span>
         </div>
-        <div className="prose max-w-none text-gray-700 whitespace-pre-line mb-8 leading-relaxed">
+        <div className="text-foreground whitespace-pre-line mb-8 leading-relaxed">
           {post.body}
         </div>
         <div className="border-t pt-6 mb-8">
-          <h3 className="font-semibold mb-2">Ve tac gia</h3>
-          <p className="text-gray-600 text-sm">
-            <strong>{authorData.name}</strong> (@{authorData.username}) —{" "}
+          <h3 className="font-semibold mb-2">Về tác giả</h3>
+          <p className="text-muted-foreground text-sm">
+            <strong className="text-foreground">{authorData.name}</strong> (@{authorData.username}) —{" "}
             {authorData.company.name}
           </p>
-          <p className="text-gray-500 text-sm">{authorData.company.catchPhrase}</p>
+          <p className="text-muted-foreground text-sm">{authorData.company.catchPhrase}</p>
         </div>
 
         {/* Comments Section — BAI TAP TU LAM PHAN 1, CAU 2 */}
         <div className="border-t pt-6">
-          <h3 className="text-xl font-bold mb-4">Binh luan ({commentList.length})</h3>
+          <h3 className="text-xl font-bold mb-4">Bình luận ({commentList.length})</h3>
           {commentList.length === 0 ? (
-            <p className="text-gray-500">Chua co binh luan nao.</p>
+            <p className="text-muted-foreground">Chưa có bình luận nào.</p>
           ) : (
             <div className="space-y-4">
               {commentList.map((comment) => (
-                <div key={comment.id} className="bg-gray-50 rounded-lg p-4">
+                <div key={comment.id} className="rounded-lg p-4 border bg-card">
                   <div className="flex items-center gap-2 mb-2">
                     <span className="font-semibold text-sm">{comment.email}</span>
                   </div>
                   <h4 className="font-medium text-sm mb-1">{comment.name}</h4>
-                  <p className="text-gray-600 text-sm">{comment.body}</p>
+                  <p className="text-muted-foreground text-sm">{comment.body}</p>
                 </div>
               ))}
             </div>

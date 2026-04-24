@@ -4,8 +4,8 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
-  title: "Portfolio - Lab 03",
-  description: "Website portfolio ca nhan - CTK46",
+  title: "Nguyễn Huỳnh Tiến Khải — 2212385 — CTK 46 A",
+  description: "Website portfolio cá nhân - CTK46 - Các Công Nghệ Mới Trong Phát Triển Phần Mềm",
 };
 
 export default function RootLayout({

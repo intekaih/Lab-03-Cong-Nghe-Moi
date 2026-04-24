@@ -34,13 +34,13 @@ export default async function BlogPage() {
   const posts = await getPostsNoStore();
 
   return (
-    <div>
+    <div className="max-w-5xl mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold mb-2">Blog</h1>
-      <p className="text-gray-500 mb-2">
-        Tong cong {posts.length} bai viet tu API
+      <p className="text-muted-foreground mb-2">
+        Tổng cộng {posts.length} bài viết từ API
       </p>
-      <p className="text-xs text-gray-400 mb-6 italic">
-        (Su dung fetch(url, &#123; cache: &apos;no-store&apos; &#125;) — moi request deu lay tu server)
+      <p className="text-xs text-muted-foreground mb-6 italic">
+        (Sử dụng fetch(url, &#123; cache: &apos;no-store&apos; &#125;) — mỗi request đều lấy từ server)
       </p>
       <div className="space-y-4">
         {posts.slice(0, 10).map((post) => (
@@ -48,8 +48,8 @@ export default async function BlogPage() {
             <Card className="hover:shadow-md transition-shadow cursor-pointer">
               <CardHeader>
                 <div className="flex items-center gap-2 mb-1">
-                  <Badge variant="secondary">Tac gia #{post.userId}</Badge>
-                  <span className="text-sm text-gray-400">Bai #{post.id}</span>
+                  <Badge variant="secondary">Tác giả #{post.userId}</Badge>
+                  <span className="text-sm text-muted-foreground">Bài #{post.id}</span>
                 </div>
                 <CardTitle className="capitalize">{post.title}</CardTitle>
                 <CardDescription className="line-clamp-2">{post.body}</CardDescription>

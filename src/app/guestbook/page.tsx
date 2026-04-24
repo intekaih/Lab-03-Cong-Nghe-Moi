@@ -30,31 +30,31 @@ export default function GuestbookPage() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-12">
-      <h1 className="text-3xl font-bold mb-2">So luu but</h1>
-      <p className="text-gray-500 mb-8">Hay de lai loi nhan cho toi nhe!</p>
+      <h1 className="text-3xl font-bold mb-2">Sổ lưu bút</h1>
+      <p className="text-muted-foreground mb-8">Hãy để lại lời nhắn cho tôi nhé!</p>
       <GuestbookForm onSuccess={fetchEntries} />
       <Separator className="my-8" />
       <div className="space-y-4">
-        <p className="text-sm text-gray-400">{entries.length} loi nhan</p>
+        <p className="text-sm text-muted-foreground">{entries.length} lời nhắn</p>
         {entries.map((entry) => (
           <Card key={entry.id}>
             <CardContent className="pt-4">
               <div className="flex items-center justify-between mb-2">
-                <span className="font-semibold text-gray-800">{entry.name}</span>
+                <span className="font-semibold text-foreground">{entry.name}</span>
                 <div className="flex items-center gap-3">
-                  <span className="text-xs text-gray-400">
+                  <span className="text-xs text-muted-foreground">
                     {new Date(entry.createdAt).toLocaleDateString("vi-VN")}
                   </span>
                   <DeleteButton id={entry.id} onDelete={fetchEntries} />
                 </div>
               </div>
-              <p className="text-gray-600">{entry.message}</p>
+              <p className="text-muted-foreground">{entry.message}</p>
             </CardContent>
           </Card>
         ))}
         {entries.length === 0 && !loading && (
-          <p className="text-center text-gray-400 py-8">
-            Chua co loi nhan nao. Hay la nguoi dau tien!
+          <p className="text-center text-muted-foreground py-8">
+            Chưa có lời nhắn nào. Hãy là người đầu tiên!
           </p>
         )}
       </div>

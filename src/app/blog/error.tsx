@@ -1,4 +1,5 @@
 "use client";
+import { Button } from "@/components/ui/button";
 
 export default function BlogError({
   error,
@@ -8,19 +9,16 @@ export default function BlogError({
   reset: () => void;
 }) {
   return (
-    <div className="text-center py-12">
-      <h2 className="text-2xl font-bold text-red-600 mb-4">
-        Da xay ra loi!
+    <div className="max-w-3xl mx-auto px-4 py-12 text-center">
+      <h2 className="text-2xl font-bold text-destructive mb-4">
+        Đã xảy ra lỗi!
       </h2>
-      <p className="text-gray-600 mb-6">
-        {error.message || "Khong the tai noi dung blog. Vui long thu lai."}
+      <p className="text-muted-foreground mb-6">
+        {error.message || "Không thể tải nội dung blog. Vui lòng thử lại."}
       </p>
-      <button
-        onClick={reset}
-        className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-      >
-        Thu lai
-      </button>
+      <Button onClick={reset}>
+        Thử lại
+      </Button>
     </div>
   );
 }

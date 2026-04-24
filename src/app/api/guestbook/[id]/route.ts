@@ -5,7 +5,7 @@ interface RouteParams {
   params: Promise<{ id: string }>;
 }
 
-// PUT /api/guestbook/[id] — Chinh sua loi nhan
+// PUT /api/guestbook/[id] — Chỉnh sửa lời nhắn
 export async function PUT(request: NextRequest, { params }: RouteParams) {
   const { id } = await params;
   const body = await request.json();
@@ -13,28 +13,28 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
 
   if (index === -1) {
     return NextResponse.json(
-      { error: "Khong tim thay loi nhan" },
+      { error: "Không tìm thấy lời nhắn" },
       { status: 404 }
     );
   }
 
   if (!body.name || !body.message) {
     return NextResponse.json(
-      { error: "Ten va loi nhan la bat buoc" },
+      { error: "Tên và lời nhắn là bắt buộc" },
       { status: 400 }
     );
   }
 
   if (body.name.length < 2 || body.name.length > 50) {
     return NextResponse.json(
-      { error: "Ten phai tu 2 den 50 ky tu" },
+      { error: "Tên phải từ 2 đến 50 ký tự" },
       { status: 400 }
     );
   }
 
   if (body.message.length < 1 || body.message.length > 500) {
     return NextResponse.json(
-      { error: "Loi nhan phai tu 1 den 500 ky tu" },
+      { error: "Lời nhắn phải từ 1 đến 500 ký tự" },
       { status: 400 }
     );
   }
@@ -48,14 +48,14 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
   return NextResponse.json(guestbookEntries[index]);
 }
 
-// DELETE /api/guestbook/[id] — Xoa loi nhan theo id
+// DELETE /api/guestbook/[id] — Xóa lời nhắn theo id
 export async function DELETE(request: NextRequest, { params }: RouteParams) {
   const { id } = await params;
   const index = guestbookEntries.findIndex((entry) => entry.id === id);
 
   if (index === -1) {
     return NextResponse.json(
-      { error: "Khong tim thay loi nhan" },
+      { error: "Không tìm thấy lời nhắn" },
       { status: 404 }
     );
   }

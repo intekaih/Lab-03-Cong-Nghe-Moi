@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { guestbookEntries } from "@/data/guestbook";
 
-// GET /api/guestbook — Lay danh sach tat ca loi nhan
+// GET /api/guestbook — Lấy danh sách tất cả lời nhắn
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const limit = searchParams.get("limit");
@@ -16,27 +16,27 @@ export async function GET(request: NextRequest) {
   return NextResponse.json(guestbookEntries);
 }
 
-// POST /api/guestbook — Them loi nhan moi
+// POST /api/guestbook — Thêm lời nhắn mới
 export async function POST(request: NextRequest) {
   const body = await request.json();
 
   if (!body.name || !body.message) {
     return NextResponse.json(
-      { error: "Ten va loi nhan la bat buoc" },
+      { error: "Tên và lời nhắn là bắt buộc" },
       { status: 400 }
     );
   }
 
   if (body.name.length < 2 || body.name.length > 50) {
     return NextResponse.json(
-      { error: "Ten phai tu 2 den 50 ky tu" },
+      { error: "Tên phải từ 2 đến 50 ký tự" },
       { status: 400 }
     );
   }
 
   if (body.message.length < 1 || body.message.length > 500) {
     return NextResponse.json(
-      { error: "Loi nhan phai tu 1 den 500 ky tu" },
+      { error: "Lời nhắn phải từ 1 đến 500 ký tự" },
       { status: 400 }
     );
   }

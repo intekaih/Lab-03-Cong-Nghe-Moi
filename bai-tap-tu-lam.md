@@ -1,35 +1,35 @@
-# Bai tap tu lam — Lab 03
+# Bài tập tự làm — Lab 03
 
-## Phan 1: Data Fetching
+## Phần 1: Data Fetching
 
-### Cau 1: Thay fetch() bang fetch(url, { cache: 'no-store' })
+### Câu 1: Thay fetch() bằng fetch(url, { cache: 'no-store' })
 **File:** `src/app/blog/page.tsx`
 
-Thay doi trong ham `getPosts()`:
+Thay đổi trong hàm `getPosts()`:
 ```typescript
-// Truoc (cached):
+// Trước (cached):
 const res = await fetch("https://jsonplaceholder.typicode.com/posts");
 
-// Sau (khong cache):
+// Sau (không cache):
 const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
   cache: "no-store"
 });
 ```
 
-**Quan sat:**
-- Mo DevTools > Network tab
-- Reload trang nhieu lan
-- Voi `cache: 'no-store'`: moi request deu co status 200 (khong from cache)
-- Voi default: request dau tien 200, cac request tiep theo (from cache) hoac 304
+**Quan sát:**
+- Mở DevTools > Network tab
+- Reload trang nhiều lần
+- Với `cache: 'no-store'`: mỗi request đều có status 200 (không from cache)
+- Với default: request đầu tiên 200, các request tiếp theo (from cache) hoặc 304
 
-**Giai thich:**
-- `cache: 'no-store'`: Khong bao gio dung cache, moi request deu goi thang den server goc
-- `next: { revalidate: 60 }`: Revalidate sau 60 giay, giua cac lan revalidate van tra ve data cu
+**Giải thích:**
+- `cache: 'no-store'`: Không bao giờ dùng cache, mỗi request đều gọi thẳng đến server gốc
+- `next: { revalidate: 60 }`: Revalidate sau 60 giây, giữa các lần revalidate vẫn trả về data cũ
 
-### Cau 2: Hien thi Comments trong trang chi tiet
+### Câu 2: Hiển thị Comments trong trang chi tiết
 **File:** `src/app/blog/[id]/page.tsx`
 
-Goi them API comments:
+Gọi thêm API comments:
 ```typescript
 async function getComments(postId: number): Promise<Comment[]> {
   const res = await fetch(
@@ -40,38 +40,38 @@ async function getComments(postId: number): Promise<Comment[]> {
 }
 ```
 
-Su dung trong component:
+Sử dụng trong component:
 ```typescript
 const comments = await getComments(post.id);
-// Hien thi danh sach comments
+// Hiển thị danh sách comments
 ```
 
-### Cau 3: Promise.all() cho goi song song
+### Câu 3: Promise.all() cho gọi song song
 **File:** `src/app/blog/[id]/page.tsx`
 
 ```typescript
-// Tuyet doi (chay tuan tu - cham hon):
+// Tuyệt đối (chạy tuần tự - chậm hơn):
 const post = await getPost(id);
 const author = await getUser(post.userId);
 
-// Tot hon (chay song song - nhanh hon):
+// Tốt hơn (chạy song song - nhanh hơn):
 const [post, author] = await Promise.all([
   getPost(id),
   getUser(post.userId)
 ]);
 ```
 
-**Tai sao tot hon?**
-1. Giam thoi gian choi (2 request chay dong thoi, chi mat thoi gian cua request cham nhat)
-2. Tap dung bandwidth
-3. Neu 1 trong 2 that bai, co the xu ly loi ngay lap tuc
-4. Giai phong thread/connection som hon
+**Tại sao tốt hơn?**
+1. Giảm thời gian chờ (2 request chạy đồng thời, chỉ mất thời gian của request chậm nhất)
+2. Tận dụng bandwidth
+3. Nếu 1 trong 2 thất bại, có thể xử lý lỗi ngay lập tức
+4. Giải phóng thread/connection sớm hơn
 
 ---
 
-## Phan 2: API Routes
+## Phần 2: API Routes
 
-### Them PUT route chinh sua entry
+### Thêm PUT route chỉnh sửa entry
 **File:** `src/app/api/guestbook/[id]/route.ts`
 
 ```typescript
@@ -80,7 +80,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
   const body = await request.json();
   const index = guestbookEntries.findIndex((entry) => entry.id === id);
   if (index === -1) {
-    return NextResponse.json({ error: "Khong tim thay" }, { status: 404 });
+    return NextResponse.json({ error: "Không tìm thấy" }, { status: 404 });
   }
   // Validate...
   guestbookEntries[index] = { ...guestbookEntries[index], ...body };
@@ -88,7 +88,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
 }
 ```
 
-### Them query param ?limit=
+### Thêm query param ?limit=
 **File:** `src/app/api/guestbook/route.ts`
 
 ```typescript
@@ -104,35 +104,35 @@ export async function GET(request: NextRequest) {
 
 ---
 
-## Phan 3: Client-side Fetching
+## Phần 3: Client-side Fetching
 
-### Loading state cho nut Xoa
+### Loading state cho nút Xóa
 **File:** `src/components/delete-button.tsx`
 
-Da co san trong component hien tai — khi `deleting` la `true`, button hien thi "Dang xoa..." va disabled.
+Đã có sẵn trong component hiện tại — khi `deleting` là `true`, button hiển thị "Đang xóa..." và disabled.
 
 ---
 
-## Phan 4: Server Actions
+## Phần 4: Server Actions
 
-### Nut "Gui tin nhan khac" sau khi gui thanh cong
+### Nút "Gửi tin nhắn khác" sau khi gửi thành công
 **File:** `src/app/contact/page.tsx`
 
-Da co san trong form hien tai — sau khi `state.success` la `true`, hien thi thong bao thanh cong voi noi dung "Cam on ban da lien he".
+Đã có sẵn trong form hiện tại — sau khi `state.success` là `true`, hiển thị thông báo thành công với nội dung "Cảm ơn bạn đã liên hệ".
 
-### useFormStatus() (thay the useActionState)
-**Luu y:** `useFormStatus()` chi hoat dong trong form con cua component cha. Tuong tu nhu `isPending` trong `useActionState`.
+### useFormStatus() (thay thế useActionState)
+**Lưu ý:** `useFormStatus()` chỉ hoạt động trong form con của component cha. Tương tự như `isPending` trong `useActionState`.
 
 ---
 
-## Phan 5: shadcn/ui
+## Phần 5: shadcn/ui
 
-### Dialog cho xac nhan xoa
+### Dialog cho xác nhận xóa
 **File:** `src/components/delete-button.tsx`
 
-Da implement su dung `Dialog` component tu shadcn/ui thay vi `window.confirm()`.
+Đã implement sử dụng `Dialog` component từ shadcn/ui thay vì `window.confirm()`.
 
 ### Avatar cho About page
 **File:** `src/app/about/page.tsx`
 
-Da su dung `Avatar` va `AvatarFallback` tu shadcn/ui.
+Đã sử dụng `Avatar` và `AvatarFallback` từ shadcn/ui.

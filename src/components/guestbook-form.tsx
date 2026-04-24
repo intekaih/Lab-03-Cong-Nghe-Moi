@@ -26,16 +26,16 @@ export default function GuestbookForm({ onSuccess }: { onSuccess: () => void }) 
   return (
     <Card className="mb-8">
       <CardHeader>
-        <CardTitle>Viet loi nhan</CardTitle>
+        <CardTitle>Viết lời nhắn</CardTitle>
       </CardHeader>
       <CardContent>
         <form action={formAction} className="space-y-4" onSubmit={handleSuccess}>
           <div className="space-y-2">
-            <Label htmlFor="name">Ten cua ban</Label>
+            <Label htmlFor="name">Tên của bạn</Label>
             <Input
               id="name"
               name="name"
-              placeholder="Nhap ten cua ban"
+              placeholder="Nhập tên của bạn"
               required
             />
             {state.errors?.name && (
@@ -43,11 +43,11 @@ export default function GuestbookForm({ onSuccess }: { onSuccess: () => void }) 
             )}
           </div>
           <div className="space-y-2">
-            <Label htmlFor="message">Loi nhan</Label>
+            <Label htmlFor="message">Lời nhắn</Label>
             <Textarea
               id="message"
               name="message"
-              placeholder="Viet loi nhan cua ban..."
+              placeholder="Viết lời nhắn của bạn..."
               required
               rows={3}
             />
@@ -58,11 +58,11 @@ export default function GuestbookForm({ onSuccess }: { onSuccess: () => void }) 
             )}
           </div>
           <Button type="submit" disabled={isPending}>
-            {isPending ? "Dang gui..." : "Gui loi nhan"}
+            {isPending ? "Đang gửi..." : "Gửi lời nhắn"}
           </Button>
           {state.success && (
             <p className="text-green-600 text-sm">
-              Gui loi nhan thanh cong!
+              Gửi lời nhắn thành công!
             </p>
           )}
         </form>

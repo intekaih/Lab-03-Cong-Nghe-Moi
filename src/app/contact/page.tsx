@@ -18,52 +18,52 @@ export default function ContactPage() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-12">
-      <h1 className="text-3xl font-bold mb-2">Lien he</h1>
-      <p className="text-gray-500 mb-8">
-        Ban co cau hoi hoac muon hop tac? Hay gui tin nhan cho toi!
+      <h1 className="text-3xl font-bold mb-2">Liên hệ</h1>
+      <p className="text-muted-foreground mb-8">
+        Bạn có câu hỏi hoặc muốn hợp tác? Hãy gửi tin nhắn cho tôi!
       </p>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* Thong tin lien he */}
+        {/* Thông tin liên hệ */}
         <div className="space-y-4">
-          <div className="bg-gray-50 rounded-lg p-4">
+          <div className="rounded-lg p-4 border bg-card">
             <h3 className="font-semibold mb-1">Email</h3>
-            <p className="text-sm text-gray-600">nguyenvana@sv.dlu.edu.vn</p>
+            <p className="text-sm text-muted-foreground">2212385@dlu.edu.vn</p>
           </div>
-          <div className="bg-gray-50 rounded-lg p-4">
-            <h3 className="font-semibold mb-1">GitHub</h3>
-            <p className="text-sm text-gray-600">github.com/nguyenvana</p>
+          <div className="rounded-lg p-4 border bg-card">
+            <h3 className="font-semibold mb-1">MSSV</h3>
+            <p className="text-sm text-muted-foreground">2212385</p>
           </div>
-          <div className="bg-gray-50 rounded-lg p-4">
-            <h3 className="font-semibold mb-1">Dia chi</h3>
-            <p className="text-sm text-gray-600">
-              Dai hoc Da Lat, 01 Phu Dong Thien Vuong, Da Lat
+          <div className="rounded-lg p-4 border bg-card">
+            <h3 className="font-semibold mb-1">Địa chỉ</h3>
+            <p className="text-sm text-muted-foreground">
+              Đại học Đà Lạt, 01 Phù Đổng Thiên Vương, Đà Lạt
             </p>
           </div>
         </div>
 
-        {/* Form lien he */}
+        {/* Form liên hệ */}
         <div className="md:col-span-2">
           {state.success ? (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-6 text-center space-y-4">
+            <div className="rounded-lg p-6 border border-green-200 bg-green-50 text-center space-y-4">
               <h3 className="text-green-700 font-semibold text-lg mb-2">
-                Gui thanh cong!
+                Gửi thành công!
               </h3>
               <p className="text-green-600">
-                Cam on ban da lien he. Toi se phan hoi som nhat co the.
+                Cảm ơn bạn đã liên hệ. Tôi sẽ phản hồi sớm nhất có thể.
               </p>
               <p className="text-sm text-green-600">
-                Kiem tra console cua server de xem tin nhan.
+                Kiểm tra console của server để xem tin nhắn.
               </p>
             </div>
           ) : (
             <form action={formAction} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="name">Ho va ten</Label>
+                <Label htmlFor="name">Họ và tên</Label>
                 <Input
                   id="name"
                   name="name"
                   type="text"
-                  placeholder="Nguyen Van A"
+                  placeholder="Nguyễn Văn A"
                   required
                 />
                 {state.errors?.name && (
@@ -88,12 +88,12 @@ export default function ContactPage() {
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="subject">Tieu de</Label>
+                <Label htmlFor="subject">Tiêu đề</Label>
                 <Input
                   id="subject"
                   name="subject"
                   type="text"
-                  placeholder="Chu de ban muon trao doi"
+                  placeholder="Chủ đề bạn muốn trao đổi"
                   required
                 />
                 {state.errors?.subject && (
@@ -103,11 +103,11 @@ export default function ContactPage() {
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="message">Noi dung</Label>
+                <Label htmlFor="message">Nội dung</Label>
                 <Textarea
                   id="message"
                   name="message"
-                  placeholder="Viet noi dung tin nhan..."
+                  placeholder="Viết nội dung tin nhắn..."
                   required
                   rows={5}
                 />
@@ -118,7 +118,7 @@ export default function ContactPage() {
                 )}
               </div>
               <Button type="submit" disabled={isPending} className="w-full">
-                {isPending ? "Dang gui..." : "Gui tin nhan"}
+                {isPending ? "Đang gửi..." : "Gửi tin nhắn"}
               </Button>
             </form>
           )}
